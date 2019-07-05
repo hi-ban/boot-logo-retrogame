@@ -53,7 +53,9 @@ int main(int argc, char* argv[]) {
 	uint32_t curr_time = SDL_GetTicks();
 	uint32_t old_time = curr_time;
 
-	if (logo_brand) {
+	if (!logo_brand) {
+		printf("Error loading logo: %s\n", IMG_GetError());
+	} else {
 		// brand fade in
 		color = SDL_MapRGB(screen->format, 0, 0, 0);
 		for (int i = 0; i <= 255; i = i + 8) {
@@ -98,8 +100,6 @@ int main(int argc, char* argv[]) {
 		old_time = curr_time;
 		SDL_Flip(screen);
 		SDL_Delay(250);
-    } else {
-    	printf("Error loading logo: %s\n", IMG_GetError());
     }	
 
 	// step3 fade in
